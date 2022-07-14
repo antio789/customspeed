@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "customspeed",
+  "version": "${version}",
+
+  "name": "Customspeed Modifier",
+  "description": "",
+  "authors": [
+    "antio789"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/customizable-times",
+    "sources": "https://github.com/antio789/breedspeed_modifier"
+  },
+
+  "license": "GPL-3.0",
+  "icon": "assets/customspeed/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "antio789.customspeed.main"
+    ],
+    "client": [
+      "antio789.customspeed.clientside"
+    ]
+  },
+  "mixins": [
+    "customspeed.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.19",
+    "java": ">=17",
+    "completeconfig": ">=2.0.0"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

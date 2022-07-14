@@ -1,0 +1,8 @@
+{
+  "config.customspeed.villager_adult":"Villageois: temps pour se reproduire en secondes",
+  "config.customspeed.villager_baby":"Bebe villageois temps pour grandir en secondes",
+  "config.customspeed.animal_adult": "animal temps pour se reproduire en secondes",
+  "config.customspeed.animal_baby": "bebe animal temps pour grandir en secondes",
+  "config.customspeed.spawnerspeed": "Generateur de monstres temps moyen pour generer des monstres en secondes",
+  "config.customspeed": "config"
+ }

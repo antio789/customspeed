@@ -1,0 +1,8 @@
+{
+"config.customspeed.villager_adult":"villager to mate again in seconds",
+  "config.customspeed.villager_baby":"baby villager to grow up in seconds",
+  "config.customspeed.animal_adult": "animal to mate again in seconds",
+  "config.customspeed.animal_baby": "baby animal to grow up in seconds",
+  "config.customspeed.spawnerspeed": "spawner speed average spawning speed in seconds",
+  "config.customspeed": "config"
+}
