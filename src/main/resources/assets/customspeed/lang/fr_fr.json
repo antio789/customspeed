@@ -1,8 +1,8 @@
 {
-  "config.customspeed.villager_adult":"Villageois: temps pour se reproduire en secondes",
-  "config.customspeed.villager_baby":"Bebe villageois temps pour grandir en secondes",
-  "config.customspeed.animal_adult": "animal temps pour se reproduire en secondes",
-  "config.customspeed.animal_baby": "bebe animal temps pour grandir en secondes",
-  "config.customspeed.spawnerspeed": "Generateur de monstres temps moyen pour generer des monstres en secondes",
-  "config.customspeed": "config"
- }
+  "gamerule.customspeed.adultVillagerbreed_150": "Villageois: temps pour se reproduire (en secondes)",
+  "gamerule.customspeed.babyVillagergrowup_600": "Bebe villageois Temps pour grandir(en secondes)",
+  "gamerule.customspeed.adultAnimalbreed_150": "Animal: temps pour se reproduire (en secondes)",
+  "gamerule.customspeed.babyAnimalgrowup_600": "Bebe animal temps pour grandir (en secondes)",
+  "gamerule.customspeed.Spawnerspeed_20": "Generateur de monstres: temps moyen pour generer des monstres(en secondes)",
+  "customspeed.config.use": "utilisez la ligne de commmande pour ce mod:/gamerule customspeed... \n tout les temps sont en SECONDES et la valeur par defaut est affiché a la fin de la commande, N'utiliser pas de valeur plus petit que 1 cela ne marchera pas \ncustomspeed.adultVillagerbreed_150 Villageois: temps pour se reproduire \ncustomspeed.babyVillagergrowup_600: Bebe villageois Temps pour grandir \ncustomspeed.adultAnimalbreed_150: Animal temps pour se reproduire \ncustomspeed.babyAnimalgrowup_600: Bebe animal temps pour grandir \ncustomspeed.Spawnerspeed_20: Generateur de monstres temps moyen pour generer des monstres"
+}
