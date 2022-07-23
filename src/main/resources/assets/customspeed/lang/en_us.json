@@ -5,5 +5,4 @@
   "gamerule.customspeed.babyAnimalgrowup_600": "Baby animal to grow up (in seconds)",
   "gamerule.customspeed.Spawnerspeed_20": "Spawner spawning speed (in seconds)",
   "customspeed.config.use": "use the command line to use this mod:/gamerule customspeed... \n all the times are in SECONDS and the default time is indicated in the gamerule name in the end, Do not put a value smaller that one it will not work \ncustomspeed.adultVillagerbreed_150 The time for a villager to mate again \n customspeed.babyVillagergrowup_600: The Time for a Baby Villager to grow up \n customspeed.adultAnimalbreed_150: The time for an Animal to mate again \n customspeed.babyAnimalgrowup_600: The time for a Baby Animal to grow up \n customspeed.Spawnerspeed_20: The time for a spawner to spawn mobs"
-
 }
