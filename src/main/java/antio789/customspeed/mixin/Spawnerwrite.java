@@ -1,7 +1,7 @@
 package antio789.customspeed.mixin;
 
 import antio789.customspeed.config.ModConfig;
-import net.minecraft.item.ItemStack;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.MobSpawnerLogic;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(MobSpawnerLogic.class)
 public abstract class Spawnerwrite {
-
     @Shadow private int minSpawnDelay;
 
     @Shadow private int maxSpawnDelay;
@@ -28,8 +27,8 @@ public abstract class Spawnerwrite {
 */
     @Inject(at = @At("RETURN"), method = "writeNbt")
     private void setspawnerread(NbtCompound nbt, CallbackInfoReturnable<NbtCompound> cir){
-        this.minSpawnDelay=ModConfig.getMinspawndelay();
-        this.maxSpawnDelay=ModConfig.getMaxspawndelay();
+            this.minSpawnDelay = ModConfig.getMinspawndelay();
+            this.maxSpawnDelay = ModConfig.getMaxspawndelay();
     }
 
 }
