@@ -4,5 +4,7 @@
   "gamerule.customspeed.adultAnimalbreed_150": "Animal: temps pour se reproduire (en secondes)",
   "gamerule.customspeed.babyAnimalgrowup_600": "Bebe animal temps pour grandir (en secondes)",
   "gamerule.customspeed.Spawnerspeed_20": "Generateur de monstres: temps moyen pour generer des monstres(en secondes)",
+  "category.customspeed.help":"Touches du mod customspeed",
+  "key.customspeed.help":"Touche d'aide, explique comment utliser le mod pour changer les vitesses en jeu",
   "customspeed.config.use": "utilisez la ligne de commmande pour ce mod:/gamerule customspeed... \n tout les temps sont en SECONDES et la valeur par defaut est affiché a la fin de la commande, N'utiliser pas de valeur plus petit que 1 cela ne marchera pas \ncustomspeed.adultVillagerbreed_150 Villageois: temps pour se reproduire \ncustomspeed.babyVillagergrowup_600: Bebe villageois Temps pour grandir \ncustomspeed.adultAnimalbreed_150: Animal temps pour se reproduire \ncustomspeed.babyAnimalgrowup_600: Bebe animal temps pour grandir \ncustomspeed.Spawnerspeed_20: Generateur de monstres temps moyen pour generer des monstres"
 }
