@@ -24,7 +24,7 @@ public class clientside implements ClientModInitializer {
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            while (keyBinding.wasPressed()) {
+            if (keyBinding.isPressed()) {
                 client.player.sendMessage(new TranslatableText(main.modid+".config.use"), false);
             }
         });
