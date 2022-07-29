@@ -60,14 +60,15 @@ public class ModConfig {
     public static final GameRules.Key<GameRules.IntRule> Spawnerspeed = GameRuleRegistry.register(main.modid+".Spawnerspeed_20", GameRules.Category.MOBS, GameRuleFactory.createIntRule(spawnerspeed));
 
     public static GameRules getRule(){
-        return Objects.requireNonNull(MinecraftClient.getInstance().getServer()).getGameRules();
+        return World.getGameRules();
     }
     public static int getspeed(GameRules.Key<GameRules.IntRule> rule){
-        if(MinecraftClient.getInstance().getServer()==null||getRule().getInt(rule)<1){
+        if(getRule().getInt(rule)<1){
             return defaults.get(rule);
         }
         return getRule().getInt(rule);
     }
+
 
 
 
