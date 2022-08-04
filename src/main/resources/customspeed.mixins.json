@@ -7,7 +7,8 @@
     "villagermixin",
     "AdultAnimalTimer",
     "BabyAnimalTimer",
-    "Spawnerwrite"
+    "Spawnerwrite",
+    "foxtimer"
   ],
   "client": [
 
