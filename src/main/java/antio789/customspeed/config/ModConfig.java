@@ -5,13 +5,10 @@ import antio789.customspeed.main;
 import com.google.common.collect.Maps;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Util;
 import net.minecraft.world.GameRules;
-
 import java.util.Map;
-import java.util.Objects;
 
 public class ModConfig {
     public ModConfig(){
