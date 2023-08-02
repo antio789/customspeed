@@ -25,7 +25,7 @@ public abstract class Spawnerwrite {
         cis.setReturnValue(nbt);
     }
 */
-    @Inject(at = @At("RETURN"), method = "toTag")
+    @Inject(at = @At("RETURN"), method = "writeNbt")
     private void setspawnerread(NbtCompound nbt, CallbackInfoReturnable<NbtCompound> cir){
             this.minSpawnDelay = ModConfig.getMinspawndelay();
             this.maxSpawnDelay = ModConfig.getMaxspawndelay();
