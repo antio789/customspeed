@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import org.lwjgl.glfw.GLFW;
 
 public class clientside implements ClientModInitializer {
@@ -26,7 +25,7 @@ public class clientside implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (keyBinding.isPressed()) {
-                client.player.sendMessage(new TranslatableText(main.modid + ".config.use"), false);
+                client.player.sendMessage(Text.translatable(main.modid + ".config.use"), false);
             }
         });
     }
