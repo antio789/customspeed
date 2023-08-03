@@ -1,8 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "customspeed",
-  "version": "${version}",
-
+  "version": "1",
   "name": "Customspeed Modifier",
   "description": "",
   "authors": [
