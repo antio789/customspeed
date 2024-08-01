@@ -5,19 +5,16 @@ import antio789.customspeed.main;
 import com.google.common.collect.Maps;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.dedicated.MinecraftDedicatedServer;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Util;
 import net.minecraft.world.GameRules;
 import java.util.Map;
 
 public class ModConfig {
     public ModConfig(){
-    }
-
-    public static MinecraftServer World;
-
-    public static void setWorld(MinecraftServer world) {
-        World =world;
     }
 
 
@@ -57,15 +54,20 @@ public class ModConfig {
     public static final GameRules.Key<GameRules.IntRule> Spawnerspeed = GameRuleRegistry.register(main.modid+".Spawnerspeed_20", GameRules.Category.MOBS, GameRuleFactory.createIntRule(spawnerspeed));
 
     public static GameRules getRule(){
-        return World.getGameRules();
+        return world.getGameRules();
     }
     public static int getspeed(GameRules.Key<GameRules.IntRule> rule){
-        if(getRule().getInt(rule)<1){
-            return defaults.get(rule);
+        try {
+            if (getRule().getInt(rule) < 1) {
+                return defaults.get(rule);
+            }
+            return getRule().getInt(rule);
         }
-        return getRule().getInt(rule);
+        catch(Exception e){
+            System.out.println("error world not loaded: " + e);
+        }
+        return defaults.get(rule);
     }
-
 
 
 
@@ -100,5 +102,8 @@ public class ModConfig {
     public static void init() {
     }
 
-
+public static ServerWorld world;
+    public static void setWorld(MinecraftServer minecraftServer, ServerWorld serverWorld) {
+        world=serverWorld;
+    }
 }

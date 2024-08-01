@@ -5,7 +5,10 @@ import antio789.customspeed.main;
 import com.google.common.collect.Maps;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.dedicated.MinecraftDedicatedServer;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Util;
 import net.minecraft.world.GameRules;
 import java.util.Map;
@@ -14,19 +17,14 @@ public class ModConfig {
     public ModConfig(){
     }
 
-    public static MinecraftServer World;
-
-    public static void setWorld(MinecraftServer world) {
-        World =world;
-    }
-
 
     private static final int villager_adult = 150;
     private static final int villager_baby = 600;
     private static final int animal_adult = 150;
     private static final int animal_baby = 600;
     private static final int spawnerspeed = 20;
-
+    private static final int allayduplication = 300;
+    public static int getAllayduplication(){return getspeed(Allayduplication)*20;}
     public static int getMinspawndelay() {
         return (getspeed(Spawnerspeed)/2)*20;
     }
@@ -34,6 +32,7 @@ public class ModConfig {
     public static int getMaxspawndelay() {
         return (getspeed(Spawnerspeed)*2)*20;
     }
+
 
     public static int getVillager_adult() { return getspeed(Villager_breed)*20;
     }
@@ -55,26 +54,34 @@ public class ModConfig {
     public static final GameRules.Key<GameRules.IntRule> Animal_breed = GameRuleRegistry.register(main.modid+".adultAnimalbreed_150", GameRules.Category.MOBS, GameRuleFactory.createIntRule(animal_adult));
     public static final GameRules.Key<GameRules.IntRule> Animal_baby = GameRuleRegistry.register(main.modid+".babyAnimalgrowup_600", GameRules.Category.MOBS, GameRuleFactory.createIntRule(animal_baby));
     public static final GameRules.Key<GameRules.IntRule> Spawnerspeed = GameRuleRegistry.register(main.modid+".Spawnerspeed_20", GameRules.Category.MOBS, GameRuleFactory.createIntRule(spawnerspeed));
+    public static final GameRules.Key<GameRules.IntRule> Allayduplication = GameRuleRegistry.register(main.modid+".AllayDuplication_300", GameRules.Category.MOBS, GameRuleFactory.createIntRule(allayduplication));
 
     public static GameRules getRule(){
-        return World.getGameRules();
+        return world.getGameRules();
     }
     public static int getspeed(GameRules.Key<GameRules.IntRule> rule){
-        if(getRule().getInt(rule)<1){
-            return defaults.get(rule);
+        try {
+            if (getRule().getInt(rule) < 1) {
+                System.out.println("error value is lower than 1 please change");
+                return defaults.get(rule);
+            }
+            return getRule().getInt(rule);
         }
-        return getRule().getInt(rule);
+        catch(Exception e){
+            System.out.println("error world not loaded: " + e);
+        }
+        return defaults.get(rule);
     }
 
 
 
-
-    private static final Map<GameRules.Key, Integer> defaults = Util.make(Maps.newHashMap(), hashMap -> {
+    private static final Map<GameRules.Key<GameRules.IntRule>, Integer> defaults = Util.make(Maps.newHashMap(), hashMap -> {
         hashMap.put(Villager_breed,villager_adult);
         hashMap.put(Villager_baby, villager_baby);
         hashMap.put(Animal_breed,animal_adult);
         hashMap.put(Animal_baby,animal_baby);
         hashMap.put(Spawnerspeed,spawnerspeed);
+        hashMap.put(Allayduplication,allayduplication);
     });
 
 
@@ -100,5 +107,8 @@ public class ModConfig {
     public static void init() {
     }
 
-
+public static ServerWorld world;
+    public static void setWorld(MinecraftServer minecraftServer, ServerWorld serverWorld) {
+        world=serverWorld;
+    }
 }

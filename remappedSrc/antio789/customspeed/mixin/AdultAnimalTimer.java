@@ -15,7 +15,4 @@ public abstract class AdultAnimalTimer {
         return ModConfig.getAnimal_adult();
     }
 
-
-
-
 }
