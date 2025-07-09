@@ -3,15 +3,16 @@
   "package": "antio789.customspeed.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "villagermixin",
     "AdultAnimalTimer",
+    "Allayduplicationtimer",
     "BabyAnimalTimer",
-    "Spawnerwrite",
+    "EggTimer",
     "foxtimer",
-    "Allayduplicationtimer"
+    "Spawnerwrite",
+    "TurtleEggTimer",
+    "villagermixin"
   ],
   "client": [
-
   ],
   "injectors": {
     "defaultRequire": 1

@@ -2,12 +2,12 @@ package antio789.customspeed.mixin;
 
 
 import antio789.customspeed.config.ModConfig;
-import net.minecraft.entity.passive.FoxEntity;
+import net.minecraft.world.entity.animal.Fox;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-@Mixin(FoxEntity.MateGoal.class)
+@Mixin(Fox.FoxBreedGoal.class)
 public abstract class foxtimer {
 
     @ModifyArg(method="breed",at= @At(value = "INVOKE",target = "Lnet/minecraft/entity/passive/AnimalEntity;setBreedingAge(I)V"),index = 0)

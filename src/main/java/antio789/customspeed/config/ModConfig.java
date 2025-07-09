@@ -17,37 +17,13 @@ public class ModConfig {
     public ModConfig(){
     }
 
-
     private static final int villager_adult = 150;
     private static final int villager_baby = 600;
     private static final int animal_adult = 150;
     private static final int animal_baby = 600;
     private static final int spawnerspeed = 20;
     private static final int allayduplication = 300;
-    public static int getAllayduplication(){return getspeed(Allayduplication)*20;}
-    public static int getMinspawndelay() {
-        return (getspeed(Spawnerspeed)/2)*20;
-    }
-
-    public static int getMaxspawndelay() {
-        return (getspeed(Spawnerspeed)*2)*20;
-    }
-
-
-    public static int getVillager_adult() { return getspeed(Villager_breed)*20;
-    }
-
-    public static int getVillager_baby() {
-        return -getspeed(Villager_baby)*20;
-    }
-
-    public static int getAnimal_adult() {
-        return getspeed(Animal_breed)*20;
-    }
-
-    public static int getAnimal_baby() {
-        return -getspeed(Animal_baby)*20;
-    }
+    private static final int turtlecrackchance = 500;
 
     public static final GameRules.Key<GameRules.IntRule> Villager_breed = GameRuleRegistry.register(main.modid+".adultVillagerbreed_150", GameRules.Category.MOBS, GameRuleFactory.createIntRule(villager_adult));
     public static final GameRules.Key<GameRules.IntRule> Villager_baby = GameRuleRegistry.register(main.modid+".babyVillagergrowup_600", GameRules.Category.MOBS, GameRuleFactory.createIntRule(villager_baby));
@@ -55,6 +31,28 @@ public class ModConfig {
     public static final GameRules.Key<GameRules.IntRule> Animal_baby = GameRuleRegistry.register(main.modid+".babyAnimalgrowup_600", GameRules.Category.MOBS, GameRuleFactory.createIntRule(animal_baby));
     public static final GameRules.Key<GameRules.IntRule> Spawnerspeed = GameRuleRegistry.register(main.modid+".Spawnerspeed_20", GameRules.Category.MOBS, GameRuleFactory.createIntRule(spawnerspeed));
     public static final GameRules.Key<GameRules.IntRule> Allayduplication = GameRuleRegistry.register(main.modid+".AllayDuplication_300", GameRules.Category.MOBS, GameRuleFactory.createIntRule(allayduplication));
+    public static final GameRules.Key<GameRules.IntRule> TurtleCrackChance = GameRuleRegistry.register(main.modid+".TurtleCrackChance_500", GameRules.Category.MOBS, GameRuleFactory.createIntRule(turtlecrackchance));
+
+    public static int getMinspawndelay() {
+        return (getspeed(Spawnerspeed)/2)*20;
+    }
+    public static int getMaxspawndelay() {
+        return (getspeed(Spawnerspeed)*2)*20;
+    }
+
+    public static int getVillager_adult() { return getspeed(Villager_breed)*20;}
+    public static int getVillager_baby() {
+        return -getspeed(Villager_baby)*20;
+    }
+    public static int getAnimal_adult() {
+        return getspeed(Animal_breed)*20;
+    }
+    public static int getAnimal_baby() {
+        return -getspeed(Animal_baby)*20;
+    }
+
+    public static int getAllayduplication(){return getspeed(Allayduplication)*20;}
+    public static int getTurtleCrackChance(){return getspeed(TurtleCrackChance);}
 
     public static GameRules getRule(){
         return world.getGameRules();
@@ -82,6 +80,7 @@ public class ModConfig {
         hashMap.put(Animal_baby,animal_baby);
         hashMap.put(Spawnerspeed,spawnerspeed);
         hashMap.put(Allayduplication,allayduplication);
+        hashMap.put(TurtleCrackChance,turtlecrackchance);
     });
 
 
