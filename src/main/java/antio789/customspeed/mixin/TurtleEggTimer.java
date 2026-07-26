@@ -6,6 +6,7 @@ import net.minecraft.block.TurtleEggBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 
 @Mixin(TurtleEggBlock.class)
@@ -15,8 +16,12 @@ public abstract class TurtleEggTimer {
         return ModConfig.getAnimal_baby();
     }
 
-    @ModifyArg(method = "shouldHatchProgress(Lnet/minecraft/world/World;)Z",at = @At(value = "INVOKE",target = "Lnet/minecraft/util/math/random/Random;nextInt(I)I"),index = 0 )
-    private int hatchprogress(int par1){
-        return ModConfig.getTurtleCrackChance();
+    //"shouldHatchProgress(Lnet/minecraft/world/World;)Z",at = @At(value = "INVOKE",target = "Lnet/minecraft/util/math/random/Random;nextInt(I)I"),index = 0 )
+    @ModifyVariable(method = "shouldHatchProgress(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)Z",at = @At(value = "STORE"))
+    private float chance(float f){
+        if(f < 1.0f){
+            return ModConfig.getTurtleCrackChance();
+        }
+        return f;
     }
 }
