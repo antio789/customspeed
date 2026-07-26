@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "customspeed",
-  "version": "2.0.2_2-21",
+  "version": "2.0.2_2-2.21",
   "name": "Customspeed Modifier",
   "description": "",
   "authors": [
@@ -30,7 +30,7 @@
 
   "depends": {
     "fabricloader": ">=0.19.3",
-    "minecraft": "~26.2",
+    "minecraft": "~26.1",
     "java": ">=25",
     "fabric-api": "*"
   },
