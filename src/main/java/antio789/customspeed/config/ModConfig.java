@@ -4,14 +4,14 @@ package antio789.customspeed.config;
 import antio789.customspeed.main;
 import com.google.common.collect.Maps;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Util;
 import java.util.Map;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleBuilder;
-import net.minecraft.world.rule.GameRule;
-import net.minecraft.world.rule.GameRuleCategory;
-import net.minecraft.world.rule.GameRules;
+import net.minecraft.world.level.gamerules.GameRule;
+import net.minecraft.world.level.gamerules.GameRuleCategory;
+import net.minecraft.world.level.gamerules.GameRules;
 
 public class ModConfig {
     public ModConfig(){
@@ -29,43 +29,43 @@ public class ModConfig {
             GameRuleBuilder.forInteger(villager_adult)
                     .range(1, 10000)
                     .category(GameRuleCategory.MOBS)
-                    .buildAndRegister(Identifier.of(main.modid, "adultvillagerbreed_150"));
+                    .buildAndRegister(Identifier.fromNamespaceAndPath(main.modid, "adultvillagerbreed_150"));
 
     public static final GameRule<Integer> Villager_baby =
             GameRuleBuilder.forInteger(villager_baby)
                     .range(1, 10000)
                     .category(GameRuleCategory.MOBS)
-                    .buildAndRegister(Identifier.of(main.modid, "babyvillagergrowup_600"));
+                    .buildAndRegister(Identifier.fromNamespaceAndPath(main.modid, "babyvillagergrowup_600"));
 
     public static final GameRule<Integer> Animal_breed =
             GameRuleBuilder.forInteger(animal_adult)
                     .range(1, 10000)
                     .category(GameRuleCategory.MOBS)
-                    .buildAndRegister(Identifier.of(main.modid, "adultanimalbreed_150"));
+                    .buildAndRegister(Identifier.fromNamespaceAndPath(main.modid, "adultanimalbreed_150"));
 
     public static final GameRule<Integer> Animal_baby =
             GameRuleBuilder.forInteger(animal_baby)
                     .range(1, 10000)
                     .category(GameRuleCategory.MOBS)
-                    .buildAndRegister(Identifier.of(main.modid, "babyanimalgrowup_600"));
+                    .buildAndRegister(Identifier.fromNamespaceAndPath(main.modid, "babyanimalgrowup_600"));
 
     public static final GameRule<Integer> Spawnerspeed =
             GameRuleBuilder.forInteger(spawner_speed)
                     .range(1, 10000)
                     .category(GameRuleCategory.MOBS)
-                    .buildAndRegister(Identifier.of(main.modid, "spawnerspeed_20"));
+                    .buildAndRegister(Identifier.fromNamespaceAndPath(main.modid, "spawnerspeed_20"));
 
     public static final GameRule<Integer> Allayduplication =
             GameRuleBuilder.forInteger(allay_duplication)
                     .range(1, 10000)
                     .category(GameRuleCategory.MOBS)
-                    .buildAndRegister(Identifier.of(main.modid, "allayduplication_300"));
+                    .buildAndRegister(Identifier.fromNamespaceAndPath(main.modid, "allayduplication_300"));
 
     public static final GameRule<Integer> TurtleCrackChance =
             GameRuleBuilder.forInteger(turtle_crackchance)
                     .range(1, 10000)
                     .category(GameRuleCategory.MOBS)
-                    .buildAndRegister(Identifier.of(main.modid, "turtlecrackchance_500"));
+                    .buildAndRegister(Identifier.fromNamespaceAndPath(main.modid, "turtlecrackchance_500"));
 
     public static int getMinspawndelay() {
         return (getspeed(Spawnerspeed)/2)*20;
@@ -93,11 +93,11 @@ public class ModConfig {
     }
     public static int getspeed(GameRule<Integer> rule){
         try {
-            if (getRule().getValue(rule) < 1) {
+            if (getRule().get(rule) < 1) {
                 System.out.println("error value is lower than 1 please change");
                 return defaults.get(rule);
             }
-            return getRule().getValue(rule);
+            return getRule().get(rule);
         }
         catch(Exception e){
             System.out.println("error world not loaded: " + e);
@@ -140,8 +140,8 @@ public class ModConfig {
     public static void init() {
     }
 
-public static ServerWorld world;
-    public static void setWorld(MinecraftServer minecraftServer, ServerWorld serverWorld) {
+public static ServerLevel world;
+    public static void setWorld(MinecraftServer minecraftServer, ServerLevel serverWorld) {
         world=serverWorld;
     }
 }
