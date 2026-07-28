@@ -4,11 +4,14 @@ package antio789.customspeed;
 
 import net.minecraft.client.KeyMapping;
 import com.mojang.blaze3d.platform.InputConstants;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.common.util.Lazy;
 import org.lwjgl.glfw.GLFW;
 
 
@@ -17,24 +20,24 @@ public class clientside {
     public clientside(IEventBus modBus) {
         // Perform logic in that should only be executed on the physical client
     }
-    private static KeyMapping keyBinding;
-    private static final Identifier ID = Identifier.fromNamespaceAndPath(main.modid,"keybinds");//new Identifier(main.modid, "keybinds");
-    public static final KeyMapping.Category HELP = new KeyMapping.Category(ID);
+    public static final Lazy<KeyMapping> MOD_KEY = Lazy.of(() -> new KeyMapping("key.customspeed.help",
+            InputConstants.Type.KEYSYM,  GLFW.GLFW_KEY_H, KeyMapping.Category.MISC
+    ));
+    @SubscribeEvent // on the game event bus only on the physical client
+    public static void onClientTick(ClientTickEvent.Post event) {
+        while (MOD_KEY.get().consumeClick()) {
+            // Execute logic to perform on click here
+        }
+    }
 
-    @Override
-    public void onInitializeClient() {
-        keyBinding = KeyBindingHelper.registerKeyBinding(new KeyMapping(
-                "key."+main.modid+".help", // The translation key of the keybinding's name
-                InputConstants.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
-                GLFW.GLFW_KEY_K, // The keycode of the key
-                HELP// The translation key of the keybinding's category.
-        ));
+    public static final KeyMapping.Category MOD_CATEGORY = new KeyMapping.Category(Identifier.fromNamespaceAndPath(customspeed.MODID , "config.use"));
 
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (keyBinding.isDown()) {
-                client.player.displayClientMessage(Component.translatable(main.modid + ".config.use"), false);
-            }
-        });
+    @SubscribeEvent // on the mod event bus only on the physical client
+    public static void registerBindings(RegisterKeyMappingsEvent event) {
+        // Register category
+        event.registerCategory(MOD_CATEGORY);
+        // Register binding with category used
+        event.register(MOD_KEY.get());
     }
 
 
