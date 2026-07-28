@@ -39,5 +39,5 @@
     "another-mod": "*"
   },
 
-  "accessWidener" : "customspeed.accesswidener"
+  "accessWidener" : "customspeed.accesswidener.cfg"
 }
