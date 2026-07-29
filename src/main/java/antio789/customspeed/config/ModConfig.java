@@ -3,16 +3,21 @@ package antio789.customspeed.config;
 
 import antio789.customspeed.customspeed;
 import com.google.common.collect.Maps;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.serialization.Codec;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.Identifier;
 import net.minecraft.util.Util;
 import java.util.Map;
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleBuilder;
-import net.minecraft.world.level.gamerules.GameRule;
-import net.minecraft.world.level.gamerules.GameRuleCategory;
-import net.minecraft.world.level.gamerules.GameRules;
+
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.level.gamerules.*;
 import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModConfig {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
@@ -28,47 +33,43 @@ public class ModConfig {
     private static final int allay_duplication = 300;
     private static final int turtle_crackchance = 500;
 
-    public static final GameRule<Integer> Villager_breed =
-            GameRuleBuilder.forInteger(villager_adult)
-                    .range(1, 10000)
-                    .category(GameRuleCategory.MOBS)
-                    .buildAndRegister(Identifier.fromNamespaceAndPath(main.modid, "adultvillagerbreed_150"));
+    public static final DeferredRegister<GameRule<?>> GAME_RULES =
+            DeferredRegister.create(BuiltInRegistries.GAME_RULE, customspeed.MODID);
 
-    public static final GameRule<Integer> Villager_baby =
-            GameRuleBuilder.forInteger(villager_baby)
-                    .range(1, 10000)
-                    .category(GameRuleCategory.MOBS)
-                    .buildAndRegister(Identifier.fromNamespaceAndPath(main.modid, "babyvillagergrowup_600"));
+    public static final DeferredHolder<GameRule<?>, GameRule<Integer>> Villager_breed =
+            GAME_RULES.register("adultvillagerbreed_150", () ->
+                    createIntGameRule(villager_adult)
+            );
 
-    public static final GameRule<Integer> Animal_breed =
-            GameRuleBuilder.forInteger(animal_adult)
-                    .range(1, 10000)
-                    .category(GameRuleCategory.MOBS)
-                    .buildAndRegister(Identifier.fromNamespaceAndPath(main.modid, "adultanimalbreed_150"));
+    public static final DeferredHolder<GameRule<?>, GameRule<Integer>> Villager_baby =
+            GAME_RULES.register("babyvillagergrowup_600", () ->
+                    createIntGameRule(villager_baby)
+            );
 
-    public static final GameRule<Integer> Animal_baby =
-            GameRuleBuilder.forInteger(animal_baby)
-                    .range(1, 10000)
-                    .category(GameRuleCategory.MOBS)
-                    .buildAndRegister(Identifier.fromNamespaceAndPath(main.modid, "babyanimalgrowup_600"));
+    public static final DeferredHolder<GameRule<?>, GameRule<Integer>> Animal_breed =
+            GAME_RULES.register("adultanimalbreed_150", () ->
+                    createIntGameRule(animal_adult)
+            );
 
-    public static final GameRule<Integer> Spawnerspeed =
-            GameRuleBuilder.forInteger(spawner_speed)
-                    .range(1, 10000)
-                    .category(GameRuleCategory.MOBS)
-                    .buildAndRegister(Identifier.fromNamespaceAndPath(main.modid, "spawnerspeed_20"));
+    public static final DeferredHolder<GameRule<?>, GameRule<Integer>> Animal_baby =
+            GAME_RULES.register("babyanimalgrowup_600", () ->
+                    createIntGameRule(animal_baby)
+            );
 
-    public static final GameRule<Integer> Allayduplication =
-            GameRuleBuilder.forInteger(allay_duplication)
-                    .range(1, 10000)
-                    .category(GameRuleCategory.MOBS)
-                    .buildAndRegister(Identifier.fromNamespaceAndPath(main.modid, "allayduplication_300"));
+    public static final DeferredHolder<GameRule<?>, GameRule<Integer>> Spawnerspeed =
+            GAME_RULES.register("spawnerspeed_20", () ->
+                    createIntGameRule(spawner_speed)
+            );
 
-    public static final GameRule<Integer> TurtleCrackChance =
-            GameRuleBuilder.forInteger(turtle_crackchance)
-                    .range(1, 10000)
-                    .category(GameRuleCategory.MOBS)
-                    .buildAndRegister(Identifier.fromNamespaceAndPath(main.modid, "turtlecrackchance_500"));
+    public static final DeferredHolder<GameRule<?>, GameRule<Integer>> Allayduplication =
+            GAME_RULES.register("allayduplication_300", () ->
+                    createIntGameRule(allay_duplication)
+            );
+
+    public static final DeferredHolder<GameRule<?>, GameRule<Integer>> TurtleCrackChance =
+            GAME_RULES.register("turtlecrackchance_500", () ->
+                    createIntGameRule(turtle_crackchance)
+            );
 
     public static int getMinspawndelay() {
         return (getspeed(Spawnerspeed)/2)*20;
@@ -94,13 +95,13 @@ public class ModConfig {
     public static GameRules getRule(){
         return world.getGameRules();
     }
-    public static int getspeed(GameRule<Integer> rule){
+    public static int getspeed(DeferredHolder<GameRule<?>,net.minecraft.world.level.gamerules.GameRule<java.lang.Integer>> rule){
         try {
-            if (getRule().get(rule) < 1) {
+            if (getRule().get(rule.get()) < 1) {
                 System.out.println("error value is lower than 1 please change");
                 return defaults.get(rule);
             }
-            return getRule().get(rule);
+            return getRule().get(rule.get());
         }
         catch(Exception e){
             System.out.println("error world not loaded: " + e);
@@ -109,15 +110,30 @@ public class ModConfig {
     }
 
 
+    private static GameRule<Integer> createIntGameRule(int defaultValue) {
+        return new GameRule<>(
+                GameRuleCategory.MOBS,
+                GameRuleType.INT,
+                IntegerArgumentType.integer(1, Integer.MAX_VALUE),
+                GameRuleTypeVisitor::visitInteger,
+                Codec.intRange(1, Integer.MAX_VALUE),
+                p -> p,
+                defaultValue,
+                FeatureFlagSet.of()
+        );
+    }
+
+
+
 
     private static final Map<GameRule<Integer>, Integer> defaults = Util.make(Maps.newHashMap(), hashMap -> {
-        hashMap.put(Villager_breed,villager_adult);
-        hashMap.put(Villager_baby, villager_baby);
-        hashMap.put(Animal_breed,animal_adult);
-        hashMap.put(Animal_baby,animal_baby);
-        hashMap.put(Spawnerspeed, spawner_speed);
-        hashMap.put(Allayduplication, allay_duplication);
-        hashMap.put(TurtleCrackChance, turtle_crackchance);
+        hashMap.put(Villager_breed.get(),villager_adult);
+        hashMap.put(Villager_baby.get(), villager_baby);
+        hashMap.put(Animal_breed.get(),animal_adult);
+        hashMap.put(Animal_baby.get(),animal_baby);
+        hashMap.put(Spawnerspeed.get(), spawner_speed);
+        hashMap.put(Allayduplication.get(), allay_duplication);
+        hashMap.put(TurtleCrackChance.get(), turtle_crackchance);
     });
 
 
