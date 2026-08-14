@@ -60,31 +60,31 @@ public class customspeed{
             // Register game rules
             csGameRules.Villager_breed = GameRules.registerInteger(
                     Identifier.fromNamespaceAndPath(MODID, "adultvillagerbreed_150").toString(),
-                    GameRuleCategory.MOBS, csGameRules.villager_adult, 150);
+                    GameRuleCategory.MOBS, csGameRules.villager_adult, 1);
 
             csGameRules.Villager_baby = GameRules.registerInteger(
                     Identifier.fromNamespaceAndPath(MODID, "babyvillagergrowup_600").toString(),
-                    GameRuleCategory.MOBS, csGameRules.villager_baby, 600);
+                    GameRuleCategory.MOBS, csGameRules.villager_baby, 1);
 
             csGameRules.Animal_breed = GameRules.registerInteger(
                     Identifier.fromNamespaceAndPath(MODID, "adultanimalbreed_150").toString(),
-                    GameRuleCategory.MOBS, csGameRules.animal_adult, 150);
+                    GameRuleCategory.MOBS, csGameRules.animal_adult, 1);
 
             csGameRules.Animal_baby = GameRules.registerInteger(
                     Identifier.fromNamespaceAndPath(MODID, "babyanimalgrowup_600").toString(),
-                    GameRuleCategory.MOBS, csGameRules.animal_baby, 600);
+                    GameRuleCategory.MOBS, csGameRules.animal_baby, 1);
 
             csGameRules.Spawnerspeed = GameRules.registerInteger(
                     Identifier.fromNamespaceAndPath(MODID, "spawnerspeed_20").toString(),
-                    GameRuleCategory.MOBS, csGameRules.spawner_speed, 20);
+                    GameRuleCategory.MOBS, csGameRules.spawner_speed, 1);
 
             csGameRules.Allayduplication = GameRules.registerInteger(
                     Identifier.fromNamespaceAndPath(MODID, "allayduplication_300").toString(),
-                    GameRuleCategory.MOBS, csGameRules.allay_duplication, 300);
+                    GameRuleCategory.MOBS, csGameRules.allay_duplication, 1);
 
             csGameRules.TurtleCrackChance = GameRules.registerInteger(
                     Identifier.fromNamespaceAndPath(MODID, "turtlecrackchance_500").toString(),
-                    GameRuleCategory.MOBS, csGameRules.turtle_crackchance, 500);
+                    GameRuleCategory.MOBS, csGameRules.turtle_crackchance, 1);
         }
     }
 
