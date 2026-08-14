@@ -37,7 +37,7 @@ public class clientside {
             // Execute logic to perform on click here
             var mc = Minecraft.getInstance();
             if (mc.player != null) {
-                mc.player.displayClientMessage(Component.translatable(customspeed.MODID + ".config.use"), false);
+                mc.player.sendSystemMessage(Component.translatable(customspeed.MODID + ".config.use"));
             }
         }
     }

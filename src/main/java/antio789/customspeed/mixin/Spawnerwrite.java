@@ -1,7 +1,10 @@
 package antio789.customspeed.mixin;
 
 import antio789.customspeed.config.csGameRules;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BaseSpawner;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -24,8 +27,8 @@ public abstract class Spawnerwrite {
         cis.setReturnValue(nbt);
     }
 */
-    @Inject(at = @At("RETURN"), method = "save")
-    private void setspawnerread(ValueOutput view, CallbackInfo ci){
+    @Inject(at = @At("RETURN"), method = "load")
+    private void setspawnerread(Level level, BlockPos pos, ValueInput input, CallbackInfo ci){
             this.minSpawnDelay = csGameRules.getMinspawndelay();
             this.maxSpawnDelay = csGameRules.getMaxspawndelay();
     }
