@@ -14,7 +14,6 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
-import org.jline.utils.Log;
 import org.slf4j.Logger;
 
 
@@ -90,14 +89,11 @@ public class customspeed{
 
     private void commonSetup(FMLCommonSetupEvent event) {
         // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
     }
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
         // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
-        event.getServer().findRespawnDimension();
         csGameRules.setWorld(event.getServer(),event.getServer().overworld());
     }
 
