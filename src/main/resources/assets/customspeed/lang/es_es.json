@@ -1,0 +1,19 @@
+{
+  "gamerule.customspeed.adultvillagerbreed_150": "Tiempo de reposición de reproducción de aldeanos",
+  "gamerule.customspeed.adultvillagerbreed_150.description": "Tiempo en segundos antes de que los aldeanos puedan reproducirse de nuevo (Predeterminado: 150)",
+  "gamerule.customspeed.babyvillagergrowup_600": "Tiempo de crecimiento de aldeanos",
+  "gamerule.customspeed.babyvillagergrowup_600.description": "Tiempo en segundos para que los aldeanos bebés crezcan hasta ser adultos (Predeterminado: 600)",
+  "gamerule.customspeed.adultanimalbreed_150": "Tiempo de reposición de reproducción de animales",
+  "gamerule.customspeed.adultanimalbreed_150.description": "Tiempo en segundos antes de que los animales puedan reproducirse de nuevo (Predeterminado: 150)",
+  "gamerule.customspeed.babyanimalgrowup_600": "Tiempo de crecimiento de animales",
+  "gamerule.customspeed.babyanimalgrowup_600.description": "Tiempo en segundos para que los animales bebés crezcan hasta ser adultos (Predeterminado: 600)",
+  "gamerule.customspeed.spawnerspeed_20": "Tiempo de reposición del generador",
+  "gamerule.customspeed.spawnerspeed_20.description": "Tiempo en segundos entre las apariciones de mobs desde los generadores (Predeterminado: 20)",
+  "gamerule.customspeed.allayduplication_300": "Tiempo de reposición de duplicación de Allay",
+  "gamerule.customspeed.allayduplication_300.description": "Tiempo en segundos antes de que un Allay pueda duplicarse de nuevo (Predeterminado: 300)",
+  "gamerule.customspeed.turtlecrackchance_500": "Probabilidad de agrietamiento de huevos de tortuga",
+  "gamerule.customspeed.turtlecrackchance_500.description": "Un huevo de tortuga se agrieta normalmente una vez por noche, también hay una baja probabilidad de agrietamiento durante el día (1/500). Reduce este valor para agrietamientos más rápidos",
+  "customspeed.config.use": "Usa la línea de comandos para usar este mod: /gamerule customspeed...\nTodos los tiempos están en SEGUNDOS y el tiempo predeterminado se indica al final del nombre de la regla de juego. No pongas un valor menor que uno, no funcionará.\ncustomspeed.adultVillagerbreed_150: Tiempo para que un aldeano se reproduzca de nuevo\ncustomspeed.babyVillagergrowup_600: Tiempo para que un aldeano bebé crezca\ncustomspeed.adultAnimalbreed_150: Tiempo para que un animal se reproduzca de nuevo\ncustomspeed.babyAnimalgrowup_600: Tiempo para que un animal bebé crezca\ncustomspeed.Spawnerspeed_20: Tiempo para que un generador genere mobs",
+  "category.customspeed.help": "Claves de la mod customspeed",
+  "key.customspeed.help": "tecla de ayuda"
+}

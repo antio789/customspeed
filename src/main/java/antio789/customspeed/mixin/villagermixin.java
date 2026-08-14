@@ -2,12 +2,11 @@ package antio789.customspeed.mixin;
 
 
 import net.minecraft.world.entity.ai.behavior.VillagerMakeLove;
-import net.minecraft.world.level.chunk.LevelChunk;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-import static antio789.customspeed.config.ModConfig.*;
+import static antio789.customspeed.config.csGameRules.*;
 
 @Mixin(VillagerMakeLove.class)
 public abstract class villagermixin {

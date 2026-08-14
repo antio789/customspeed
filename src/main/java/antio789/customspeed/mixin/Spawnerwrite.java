@@ -1,15 +1,13 @@
 package antio789.customspeed.mixin;
 
-import antio789.customspeed.config.ModConfig;
+import antio789.customspeed.config.csGameRules;
 import net.minecraft.world.level.BaseSpawner;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BaseSpawner.class)
 public abstract class Spawnerwrite {
@@ -28,8 +26,8 @@ public abstract class Spawnerwrite {
 */
     @Inject(at = @At("RETURN"), method = "save")
     private void setspawnerread(ValueOutput view, CallbackInfo ci){
-            this.minSpawnDelay = ModConfig.getMinspawndelay();
-            this.maxSpawnDelay = ModConfig.getMaxspawndelay();
+            this.minSpawnDelay = csGameRules.getMinspawndelay();
+            this.maxSpawnDelay = csGameRules.getMaxspawndelay();
     }
 
 }

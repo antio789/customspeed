@@ -1,15 +1,10 @@
 package antio789.customspeed;
 
-import com.mojang.brigadier.arguments.IntegerArgumentType;
+import antio789.customspeed.config.csGameRules;
 import com.mojang.logging.LogUtils;
-import com.mojang.serialization.Codec;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.flag.FeatureFlagSet;
-import net.minecraft.world.level.gamerules.GameRule;
-import net.minecraft.world.level.gamerules.GameRuleCategory;
-import net.minecraft.world.level.gamerules.GameRuleType;
-import net.minecraft.world.level.gamerules.GameRuleTypeVisitor;
+import net.minecraft.world.level.gamerules.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -18,8 +13,8 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.internal.RegistrationEvents;
 import net.neoforged.neoforge.registries.RegisterEvent;
+import org.jline.utils.Log;
 import org.slf4j.Logger;
 
 
@@ -44,16 +39,53 @@ public class customspeed{
     }
     */
     public customspeed(IEventBus modEventBus, ModContainer modContainer) {
-        antio789.customspeed.config.ModConfig.GAME_RULES.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::registerSetup);
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (customspeed) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
 
-        // Register our mod's ModConfigSpec so that FML can create and load the config file for us
-        modContainer.registerConfig(ModConfig.Type.COMMON, antio789.customspeed.config.ModConfig.SPEC);
 
+        // Register our mod's ModConfigSpec so that FML can create and load the config file for us
+        modContainer.registerConfig(ModConfig.Type.COMMON, csGameRules.SPEC);
+    }
+
+
+    public void registerSetup(RegisterEvent event) {
+        LOGGER.info("HELLO FROM registerevents");
+        if (event.getRegistry().equals(BuiltInRegistries.GAME_RULE)) {
+            LOGGER.info("HELLO FROM registerevents 2");
+            // Register game rules
+            csGameRules.Villager_breed = GameRules.registerInteger(
+                    Identifier.fromNamespaceAndPath(MODID, "adultvillagerbreed_150").toString(),
+                    GameRuleCategory.MOBS, csGameRules.villager_adult, 150);
+
+            csGameRules.Villager_baby = GameRules.registerInteger(
+                    Identifier.fromNamespaceAndPath(MODID, "babyvillagergrowup_600").toString(),
+                    GameRuleCategory.MOBS, csGameRules.villager_baby, 600);
+
+            csGameRules.Animal_breed = GameRules.registerInteger(
+                    Identifier.fromNamespaceAndPath(MODID, "adultanimalbreed_150").toString(),
+                    GameRuleCategory.MOBS, csGameRules.animal_adult, 150);
+
+            csGameRules.Animal_baby = GameRules.registerInteger(
+                    Identifier.fromNamespaceAndPath(MODID, "babyanimalgrowup_600").toString(),
+                    GameRuleCategory.MOBS, csGameRules.animal_baby, 600);
+
+            csGameRules.Spawnerspeed = GameRules.registerInteger(
+                    Identifier.fromNamespaceAndPath(MODID, "spawnerspeed_20").toString(),
+                    GameRuleCategory.MOBS, csGameRules.spawner_speed, 20);
+
+            csGameRules.Allayduplication = GameRules.registerInteger(
+                    Identifier.fromNamespaceAndPath(MODID, "allayduplication_300").toString(),
+                    GameRuleCategory.MOBS, csGameRules.allay_duplication, 300);
+
+            csGameRules.TurtleCrackChance = GameRules.registerInteger(
+                    Identifier.fromNamespaceAndPath(MODID, "turtlecrackchance_500").toString(),
+                    GameRuleCategory.MOBS, csGameRules.turtle_crackchance, 500);
+        }
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
@@ -65,6 +97,8 @@ public class customspeed{
     public void onServerStarting(ServerStartingEvent event) {
         // Do something when the server starts
         LOGGER.info("HELLO from server starting");
+        event.getServer().findRespawnDimension();
+        csGameRules.setWorld(event.getServer(),event.getServer().overworld());
     }
 
 
