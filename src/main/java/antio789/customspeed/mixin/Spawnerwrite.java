@@ -3,7 +3,10 @@ package antio789.customspeed.mixin;
 import antio789.customspeed.config.ModConfig;
 import net.minecraft.block.spawner.MobSpawnerLogic;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,8 +29,8 @@ public abstract class Spawnerwrite {
         cis.setReturnValue(nbt);
     }
 */
-    @Inject(at = @At("RETURN"), method = "writeData")
-    private void setspawnerread(WriteView view, CallbackInfo ci){
+    @Inject(at = @At("RETURN"), method = "readData")
+    private void setspawnerread(World world, BlockPos pos, ReadView view, CallbackInfo ci){
             this.minSpawnDelay = ModConfig.getMinspawndelay();
             this.maxSpawnDelay = ModConfig.getMaxspawndelay();
     }
