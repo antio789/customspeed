@@ -51,7 +51,7 @@ public class ModConfig {
 
     public static final GameRule<Integer> Spawnerspeed =
             GameRuleBuilder.forInteger(spawner_speed)
-                    .range(1, 10000)
+                    .range(2, 10000)
                     .category(GameRuleCategory.MOBS)
                     .buildAndRegister(Identifier.fromNamespaceAndPath(main.modid, "spawnerspeed_20"));
 
