@@ -20,7 +20,6 @@ import org.slf4j.Logger;
 @Mod(customspeed.MODID)
 public class customspeed{
     public static final String MODID = "customspeed";
-
     public static final Logger LOGGER = LogUtils.getLogger();
 
     /**
